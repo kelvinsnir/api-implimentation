@@ -14,7 +14,9 @@ class AuthController extends Controller
      
         return $this->ok($request->get('email'));
 
-        // return $this->success($message, 200);php
 
+    }
+    public function register(){
+        return $this->ok('register');
     }
 }
