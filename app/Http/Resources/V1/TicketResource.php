@@ -18,7 +18,26 @@ class TicketResource extends JsonResource
 
         return [
             'type' => 'ticket',
-            'id' => $this->id
+            'id' => $this->id,
+            'attributes' => [
+                'title' => $this->title,
+                'description' => $this->description,
+                'status'=> $this->status,
+                'created_at'=>$this->created_at,
+                'updatted_at' => $this->updated_at
+            ],
+            'relationships'=> [
+                'author' => [
+                    'type' => 'user',
+                    'id' => $this->user_id
+                ],
+                'links' => [
+                    ['self' => 'todo']
+                ],
+            ],
+            'links' => [
+                'self' => route('tickets.show', ['tickets', $this->id])
+            ]
         ];
     }
 }

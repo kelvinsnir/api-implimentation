@@ -16,7 +16,7 @@ class TicketController extends Controller
     public function index()
     {
         //using ticketresource to translate ticket model into the json structure
-        return TicketResource::collection(Ticket::all());
+        return TicketResource::collection(Ticket::paginate());
         // Ticket::all();
     }
 
