@@ -17,6 +17,7 @@ class TicketController extends Controller
     {
         //using ticketresource to translate ticket model into the json structure
         return TicketResource::collection(Ticket::all());
+        // Ticket::all();
     }
 
     /**
@@ -32,7 +33,7 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
-        //
+        return new TicketResource($ticket);
     }
 
     
