@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use App\Models\Ticket;
+use App\Models\User;
 use App\Http\Requests\Api\V1\StoreTicketRequest;
 use App\Http\Requests\Api\V1\UpdateTicketRequest;
 use App\Http\Resources\V1\TicketResource;
 
-class TicketController extends Controller
+class TicketController extends ApiController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //using ticketresource to translate ticket model into the json structure
+
+        if($this->include('author')){
+            return TicketResourse::collection(Ticket::with('user')->paginate());
+        }
+        //using ticketresource collection to translate ticket model into the json structure
         return TicketResource::collection(Ticket::paginate());
         // Ticket::all();
     }
@@ -33,6 +37,9 @@ class TicketController extends Controller
      */
     public function show(Ticket $ticket)
     {
+        if($this->include('author')) {
+            return new TicketResource($ticket->load('user'));
+        }
         return new TicketResource($ticket);
     }
 
