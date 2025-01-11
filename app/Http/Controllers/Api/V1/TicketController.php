@@ -7,21 +7,24 @@ use App\Models\User;
 use App\Http\Requests\Api\V1\StoreTicketRequest;
 use App\Http\Requests\Api\V1\UpdateTicketRequest;
 use App\Http\Resources\V1\TicketResource;
+use App\Http\Filters\V1\TicketFilter;
 
 class TicketController extends ApiController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(TicketFilter $filters)
     {
 
-        if($this->include('author')){
-            return TicketResourse::collection(Ticket::with('user')->paginate());
-        }
-        //using ticketresource collection to translate ticket model into the json structure
-        return TicketResource::collection(Ticket::paginate());
-        // Ticket::all();
+        return TicketResource::collection(Ticket::filter($filters)->paginate());
+
+    //     if($this->include('author')){
+    //         return TicketResourse::collection(Ticket::with('user')->paginate());
+    //     }
+    //     //using ticketresource collection to translate ticket model into the json structure
+    //     return TicketResource::collection(Ticket::paginate());
+    //     // Ticket::all();
     }
 
     /**
