@@ -37,5 +37,5 @@ Ensure you have the following installed:
 6. **Configure the env file to match your environment**
 7. **To start the development server**
    php artisan serve
-   Access the application at http://localhost:8000.
-9. 
+   
+9. **Access the application at http://localhost:8000.**
